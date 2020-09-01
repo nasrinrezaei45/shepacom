@@ -31,7 +31,7 @@ Set your api key and redirect url in `.env` file:
     use Nasrinrezaei45\Shepacom\ShepacomPG;
     
     class PaymentController extends Controller
-{
+    {
     public function pay()
     {
 
@@ -39,7 +39,7 @@ Set your api key and redirect url in `.env` file:
         $shepacom->amount = 100000; // Required, Amount
         $shepacom->factorNumber = 'Factor-Number'; // Optional
         $shepacom->description = 'Some Description'; // Optional
-        $shepacom->mobile = '09133239584'; // Optional, If you want to show user's saved card numbers in gateway
+        $shepacom->mobile = '091xxxxxxxx'; // Optional, If you want to show user's saved card numbers in gateway
         $shepacom->email = 'nasrinrezaei45@gmail.com'; // Optional, If you want to show user's saved card numbers in gateway
         $shepacom->callback = 'http://127.0.0.1:8000/verify'; // Optional, If you want to show user's saved card numbers in gateway
         try {
