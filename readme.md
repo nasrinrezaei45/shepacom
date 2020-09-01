@@ -71,6 +71,8 @@ Set your api key and redirect url in `.env` file:
     }
 }
 
+
+
 ### Routes
 
     Route::get('/shepacom/callback', 'PaymentController@verify');
