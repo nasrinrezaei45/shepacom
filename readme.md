@@ -32,23 +32,22 @@ Set your api key and redirect url in `.env` file:
     
     class PaymentController extends Controller
     {
-    public function pay()
-    {
-
-        $shepacom = new ShepacomPG();
-        $shepacom->amount = 100000; // Required, Amount
-        $shepacom->factorNumber = 'Factor-Number'; // Optional
-        $shepacom->description = 'Some Description'; // Optional
-        $shepacom->mobile = '091xxxxxxxx'; // Optional, If you want to show user's saved card numbers in gateway
-        $shepacom->email = 'nasrinrezaei45@gmail.com'; // Optional, If you want to show user's saved card numbers in gateway
-        $shepacom->callback = 'http://127.0.0.1:8000/verify'; // Optional, If you want to show user's saved card numbers in gateway
-        try {
-            $shepacom->send();
-            return redirect($shepacom->paymentUrl);
-        } catch (SendException $e) {
-            throw $e;
-        }
-    }
+        public function pay()
+        {
+            $shepacom = new ShepacomPG();
+            $shepacom->amount = 100000; // Required, Amount
+            $shepacom->factorNumber = 'Factor-Number'; // Optional
+            $shepacom->description = 'Some Description'; // Optional
+            $shepacom->mobile = '091xxxxxxxx'; // Optional, If you want to show user's saved card numbers in gateway
+            $shepacom->email = 'nasrinrezaei45@gmail.com'; // Optional, If you want to show user's saved card numbers in gateway
+            $shepacom->callback = 'http://127.0.0.1:8000/verify'; // Optional, If you want to show user's saved card numbers in gateway
+            try {
+                $shepacom->send();
+                return redirect($shepacom->paymentUrl);
+            } catch (SendException $e) {
+                throw $e;
+            }
+      }
 
     public function verify(Request $request)
     {
@@ -69,7 +68,9 @@ Set your api key and redirect url in `.env` file:
         }
 
     }
-}
+    }
+
+
 
 ### Routes
 
