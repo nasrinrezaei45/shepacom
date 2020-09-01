@@ -1,0 +1,37 @@
+{
+  "name": "nasrinrezaei45/shepacom",
+  "description": "Shepa.com Laravel Package",
+  "keywords": [
+    "laravel",
+    "shepacom",
+    "Shepa"
+  ],
+  "authors": [
+    {
+      "name": "Nasrin Rezaei",
+      "email": "nasrinrezaei45@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "NasrinRezaei45\\Shepacom\\": "src"
+    }
+  },
+  "require": {
+    "php": "^7.1.3",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "NasrinRezaei45\\Shepacom\\ShepacomServiceProvider"
+      ],
+      "aliases": {
+        "NasrinRezaei45": "NasrinRezaei45\\Shepacom\\Facade"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "license": "MIT"
+}
