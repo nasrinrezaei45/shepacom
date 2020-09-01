@@ -4,7 +4,7 @@ Laravel package to connect to Shepa.com Payment Gateway
 
 ## Installation
 
-`composer require nasrinrezaei45/shepa`
+`composer require nasrinrezaei45/shepacom`
 
 ## Publish Configurations
 
