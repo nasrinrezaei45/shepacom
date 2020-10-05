@@ -56,7 +56,7 @@ class Shepacom extends Facade
                 return $send['response'];
             }
 
-            dd($verify['response']['error']);
+            dd($send['response']['error']);
         }
 
         throw new SendException('خطا در ارسال اطلاعات به Shepa.com. لطفا از برقرار بودن اینترنت و در دسترس بودن shepa.com اطمینان حاصل کنید');

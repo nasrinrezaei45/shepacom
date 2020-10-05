@@ -14,6 +14,7 @@ class ShepacomPG
     public $mobile;
     public $description;
     public $paymentUrl;
+	public $api;
 
     /**
      * send
@@ -24,7 +25,7 @@ class ShepacomPG
     public function send()
     {
         try {
-            $send = Shepacom::send($this->amount, $this->callback, $this->email, $this->mobile, $this->description);
+            $send = Shepacom::send($this->amount, $this->callback, $this->email, $this->mobile, $this->description , $this->api);
             $this->paymentUrl = $send['payment_url'];
         } catch (Exceptions\SendException $e) {
             throw $e;
