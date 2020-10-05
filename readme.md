@@ -26,9 +26,9 @@ Set your api key and redirect url in `.env` file:
     namespace App\Http\Controllers;
     
     use Illuminate\Http\Request;
-    use Nasrinrezaei45\Shepacom\Exceptions\SendException;
-    use Nasrinrezaei45\Shepacom\Exceptions\VerifyException;
-    use Nasrinrezaei45\Shepacom\ShepacomPG;
+    use NasrinRezaei45\Shepacom\Exceptions\SendException;
+    use NasrinRezaei45\Shepacom\Exceptions\VerifyException;
+    use NasrinRezaei45\Shepacom\ShepacomPG;
     
     class PaymentController extends Controller
     {
@@ -74,7 +74,8 @@ Set your api key and redirect url in `.env` file:
 
 ### Routes
 
-    Route::get('/shepacom/callback', 'PaymentController@verify');
+    Route::get('pay', 'PaymentController@pay');
+    Route::get('verify', 'PaymentController@verify');
     
 ## Usage with facade
 
