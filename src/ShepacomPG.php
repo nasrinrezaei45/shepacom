@@ -14,7 +14,7 @@ class ShepacomPG
     public $mobile;
     public $description;
     public $paymentUrl;
-	public $api;
+    public $api;
 
     /**
      * send
