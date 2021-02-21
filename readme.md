@@ -80,9 +80,7 @@ Set your api key and redirect url in config/shepacom file:
     
 ## Usage with facade
 
-Config `aliases` in `config/app.php` :
 
-    'Shepacom' => NasrinRezaei45\Shepacom\Facades\Shepacom::class
     
 *Send*
 
