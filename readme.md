@@ -13,7 +13,7 @@ Laravel package to connect to Shepa.com Payment Gateway
 ## Config
 
 Set your api key and redirect url in config/shepacom file:
-
+```php
    return array(
     'default' => 'sandbox',
     'drivers' => [
@@ -31,7 +31,7 @@ Set your api key and redirect url in config/shepacom file:
         'merchant' => \NasrinRezaei45\Shepacom\Drivers\Merchant\Merchant::class,
     ],
 );
-    
+  ```  
 ## Usage
 
 ### route 
