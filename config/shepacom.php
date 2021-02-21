@@ -7,7 +7,7 @@ return array(
             'callback' => env('SANDBOX_SHEPA_CALLBACK', 'http://localhost:8000/api/shepa/sandbox/verify'),
         ],
         'merchant' => [
-            'api_key'  => env('SHEPACOM_API_KEY',"6d0adef4-aee3-43be-b16c-408b5f583e46"),
+            'api_key'  => env('SHEPACOM_API_KEY',"xxxxxx"),
             'callback' => env('SHEPACOM_CALLBACK', 'http://localhost:8000/api/shepa/merchant/verify'),
         ],
     ],

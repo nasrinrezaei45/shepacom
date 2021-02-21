@@ -12,70 +12,70 @@ Laravel package to connect to Shepa.com Payment Gateway
 
 ## Config
 
-Set your api key and redirect url in `.env` file:
+Set your api key and redirect url in config/shepacom file:
 
-    SHEPACOM_API_KEY=test
-    SHEPACOM_REDIRECT=/shepacom/callback
+   return array(
+    'default' => 'sandbox',
+    'drivers' => [
+        'sandbox'  => [
+            'api_key'  => 'sandbox',
+            'callback' => env('SANDBOX_SHEPA_CALLBACK', 'http://localhost:8000/api/shepa/sandbox/verify'),
+        ],
+        'merchant' => [
+            'api_key'  => env('SHEPACOM_API_KEY',"xxxxxx"),
+            'callback' => env('SHEPACOM_CALLBACK', 'http://localhost:8000/api/shepa/merchant/verify'),
+        ],
+    ],
+    'map'     => [
+        'sandbox'  => \NasrinRezaei45\Shepacom\Drivers\Sandbox\Sandbox::class,
+        'merchant' => \NasrinRezaei45\Shepacom\Drivers\Merchant\Merchant::class,
+    ],
+);
     
 ## Usage
 
-### Payment Controller
+### route 
 
-    <?php
     
-    namespace App\Http\Controllers;
-    
-    use Illuminate\Http\Request;
-    use NasrinRezaei45\Shepacom\Exceptions\SendException;
-    use NasrinRezaei45\Shepacom\Exceptions\VerifyException;
-    use NasrinRezaei45\Shepacom\ShepacomPG;
-    
-    class PaymentController extends Controller
-    {
-        public function pay()
-        {
-            $shepacom = new ShepacomPG();
-            $shepacom->amount = 100000; // Required, Amount
-            $shepacom->factorNumber = 'Factor-Number'; // Optional
-            $shepacom->description = 'Some Description'; // Optional
-            $shepacom->mobile = '091xxxxxxxx'; // Optional, If you want to show user's saved card numbers in gateway
-            $shepacom->email = 'nasrinrezaei45@gmail.com'; // Optional, If you want to show user's saved card numbers in gateway
-            $shepacom->callback = 'http://127.0.0.1:8000/verify'; // Optional, If you want to show user's saved card numbers in gateway
-            try {
-                $shepacom->send();
-                return redirect($shepacom->paymentUrl);
-            } catch (SendException $e) {
-                throw $e;
-            }
-      }
+    ///////////////////////////////////////////////// sandbox //////////////////////////////////////////////////////////////
 
-    public function verify(Request $request)
-    {
-        if(isset($request->status) && ($request->status == "success")) {
-            $shepacom = new ShepacomPG();
-            $shepacom->token = $request->token; // Shepa.com returns this token to your redirect url
-            $shepacom->amount = 100000; // Required, Amount
-            try {
-                $verify = $shepacom->verify(); // returns verify result from Shepa.com like (transId, cardNumber, ...)
+Route::get('/shepa/sandbox/send', function (Request $request) {
 
-                dd($verify);
-            } catch (VerifyException $e) {
-                throw $e;
-            }
-        }
-        else {
-            dd("cancel payment");
-        }
 
+    $result = \NasrinRezaei45\Shepacom\ShepaFacade::send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
+    return redirect($result);
+
+});
+
+Route::get('/shepa/sandbox/verify', function (Request $request) {
+
+    if ($request->token && $request->status == 'success') {
+        $result = \NasrinRezaei45\Shepacom\ShepaFacade::verify($request->token, 1000);
+        var_dump($result);
     }
+    //user canceled the request payment
+});
+
+
+
+////////////////////////////////////////////////////////////////////////// merchant ////////////////////////////////////////////
+Route::get('/shepa/merchant/send', function (Request $request) {
+    $result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
+    return redirect($result);
+});
+
+
+Route::get('/shepa/merchant/verify', function (Request $request) {
+    if ($request->token && $request->status == 'success') {
+        $result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->verify($request->token, 1000);
+        var_dump($result);
     }
+    //user canceled the request payment
+});
 
 
 
-### Routes
 
-    Route::get('pay', 'PaymentController@pay');
-    Route::get('verify', 'PaymentController@verify');
     
 ## Usage with facade
 
@@ -85,11 +85,11 @@ Config `aliases` in `config/app.php` :
     
 *Send*
 
-    Shepacom::send($amount, $redirect = null, $email = null, $mobile = null, $description = null, $api = null);
+    ShepaFacade::via("merchant")->send($amount, $email, $mobile, $description);
     
 *Verify*
 
-    Shepacom::verify($token);
+    ShepaFacade::via("merchant")->verify($token, $amount);
     
 ## Security
 
