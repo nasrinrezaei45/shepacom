@@ -19,19 +19,15 @@
     }
   },
   "require": {
-    "php": "^7.1.3",
+    "php": "^7.2",
     "ext-curl": "*",
-    "ext-json": "*",
-	"nasrinrezaei45/shepacom":"dev-master@dev"
+    "ext-json": "*"
   },
   "extra": {
     "laravel": {
       "providers": [
         "NasrinRezaei45\\Shepacom\\ShepacomServiceProvider"
-      ],
-      "aliases": {
-        "NasrinRezaei45": "NasrinRezaei45\\Shepacom\\Facade"
-      }
+      ]
     }
   },
   "license": "MIT",

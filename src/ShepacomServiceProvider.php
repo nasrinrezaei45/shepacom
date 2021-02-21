@@ -16,6 +16,10 @@ class ShepacomServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/shepacom.php', 'shepacom'
         );
+
+        $this->app->bind('shepa', function () {
+            return new Shepa(config('shepacom'));
+        });
     }
 
     /**
