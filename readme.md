@@ -36,46 +36,47 @@ Set your api key and redirect url in config/shepacom file:
 
 ### route 
 
+<?php 
     
-    ///////////////////////////////////////////////// sandbox //////////////////////////////////////////////////////////////
+//////// sandbox //////////
 
-Route::get('/shepa/sandbox/send', function (Request $request) {
-
-
-    $result = \NasrinRezaei45\Shepacom\ShepaFacade::send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
-    return redirect($result);
-
-});
-
-Route::get('/shepa/sandbox/verify', function (Request $request) {
-
-    if ($request->token && $request->status == 'success') {
-        $result = \NasrinRezaei45\Shepacom\ShepaFacade::verify($request->token, 1000);
-        var_dump($result);
-    }
-    //user canceled the request payment
-});
+	Route::get('/shepa/sandbox/send', function (Request $request) {
 
 
+		$result = \NasrinRezaei45\Shepacom\ShepaFacade::send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
+		return redirect($result);
 
-////////////////////////////////////////////////////////////////////////// merchant ////////////////////////////////////////////
-Route::get('/shepa/merchant/send', function (Request $request) {
-    $result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
-    return redirect($result);
-});
+	});
 
+	Route::get('/shepa/sandbox/verify', function (Request $request) {
 
-Route::get('/shepa/merchant/verify', function (Request $request) {
-    if ($request->token && $request->status == 'success') {
-        $result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->verify($request->token, 1000);
-        var_dump($result);
-    }
-    //user canceled the request payment
-});
+		if ($request->token && $request->status == 'success') {
+			$result = \NasrinRezaei45\Shepacom\ShepaFacade::verify($request->token, 1000);
+			var_dump($result);
+		}
+		//user canceled the request payment
+	});
 
 
 
+	///////// merchant ////////
+	Route::get('/shepa/merchant/send', function (Request $request) {
+		$result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
+		return redirect($result);
+	});
 
+
+	Route::get('/shepa/merchant/verify', function (Request $request) {
+		if ($request->token && $request->status == 'success') {
+			$result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->verify($request->token, 1000);
+			var_dump($result);
+		}
+		//user canceled the request payment
+	});
+
+
+
+?>
     
 ## Usage with facade
 
