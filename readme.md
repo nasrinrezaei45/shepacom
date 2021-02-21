@@ -36,7 +36,7 @@ Set your api key and redirect url in config/shepacom file:
 
 ### route 
 
-<?php 
+```php
     
 //////// sandbox //////////
 
@@ -76,7 +76,7 @@ Set your api key and redirect url in config/shepacom file:
 
 
 
-?>
+  ``` 
     
 ## Usage with facade
 
