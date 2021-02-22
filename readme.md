@@ -13,7 +13,7 @@ Laravel package to connect to Shepa.com Payment Gateway
 ## Config
 
 Set your api key and redirect url in config/shepacom file:
-
+```php
    return array(
     'default' => 'sandbox',
     'drivers' => [
@@ -31,57 +31,57 @@ Set your api key and redirect url in config/shepacom file:
         'merchant' => \NasrinRezaei45\Shepacom\Drivers\Merchant\Merchant::class,
     ],
 );
-    
+  ```  
 ## Usage
+
 
 ### route 
 
+```php
     
-    ///////////////////////////////////////////////// sandbox //////////////////////////////////////////////////////////////
+//////// sandbox //////////
 
 Route::get('/shepa/sandbox/send', function (Request $request) {
 
 
-    $result = \NasrinRezaei45\Shepacom\ShepaFacade::send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
-    return redirect($result);
+	$result = \NasrinRezaei45\Shepacom\ShepaFacade::send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
+	return redirect($result);
 
 });
 
 Route::get('/shepa/sandbox/verify', function (Request $request) {
 
-    if ($request->token && $request->status == 'success') {
-        $result = \NasrinRezaei45\Shepacom\ShepaFacade::verify($request->token, 1000);
-        var_dump($result);
-    }
-    //user canceled the request payment
+	if ($request->token && $request->status == 'success') {
+		$result = \NasrinRezaei45\Shepacom\ShepaFacade::verify($request->token, 1000);
+		var_dump($result);
+	}
+	//user canceled the request payment
 });
 
 
 
-////////////////////////////////////////////////////////////////////////// merchant ////////////////////////////////////////////
+///////// merchant ////////
 Route::get('/shepa/merchant/send', function (Request $request) {
-    $result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
-    return redirect($result);
+	$result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->send(1000, "sph_1996@yahoo.com", "09xxxxxxxxx", "desc");
+	return redirect($result);
 });
 
 
 Route::get('/shepa/merchant/verify', function (Request $request) {
-    if ($request->token && $request->status == 'success') {
-        $result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->verify($request->token, 1000);
-        var_dump($result);
-    }
-    //user canceled the request payment
+	if ($request->token && $request->status == 'success') {
+		$result = \NasrinRezaei45\Shepacom\ShepaFacade::via("merchant")->verify($request->token, 1000);
+		var_dump($result);
+	}
+	//user canceled the request payment
 });
 
 
 
-
+  ``` 
     
 ## Usage with facade
 
-Config `aliases` in `config/app.php` :
 
-    'Shepacom' => NasrinRezaei45\Shepacom\Facades\Shepacom::class
     
 *Send*
 
