@@ -29,7 +29,7 @@ class Merchant extends Driver
         ];
         $api_result = $this->curl_request($this->token_url, $params);
         if (isset($api_result['success']) && $api_result['success'] == true) {
-            return $api_result['result']['url'];
+            return $api_result['result'];
         }
         $errors = '';
         foreach ($api_result['error'] as $err) {
